@@ -1,0 +1,31 @@
+{
+  "name": "git-change-lines",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "lsc -c -o ./dist src/index.ls",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "git-lines": "bin/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miyabisun/git-change-lines.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miyabisun/git-change-lines/issues"
+  },
+  "homepage": "https://github.com/miyabisun/git-change-lines#readme",
+  "devDependencies": {
+    "livescript": "^1.5.0"
+  },
+  "dependencies": {
+    "luxon": "^0.2.9",
+    "prelude-ls": "^1.1.2"
+  }
+}
