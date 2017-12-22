@@ -20,7 +20,6 @@ opt = suppress-milliseconds: yes
   |> split "\n"
   |> map split "\t"
   |> filter (.length > 2)
-  |> reject (.2 is /package\-lock/)
   |> fold (({add, remove}:s, a) -> s <<< {add: add + abs(a.0), remove: remove + abs(a.1)}), {add: 0, remove:0}
   |> ({add, remove}) ->
     return unless (add or remove)
