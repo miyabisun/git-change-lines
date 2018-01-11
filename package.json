@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "luxon": "^0.2.9",
-    "prelude-ls": "^1.1.2"
+    "prelude-ls": "^1.1.2",
+    "ramda": "^0.25.0"
   }
 }

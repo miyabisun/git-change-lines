@@ -10,26 +10,37 @@
   opt = {
     suppressMilliseconds: true
   };
-  each(function(date){
+  (function(arg$){
+    var date, add, remove;
+    date = arg$.date, add = arg$.add, remove = arg$.remove;
+    return console.log("Summary:", (add + remove) + " (+" + add + " -" + remove + ")");
+  })(
+  fold(function(s, a){
+    var add, remove;
+    add = a.add, remove = a.remove;
+    return s.add = s.add + add, s.remove = s.remove + remove, s;
+  }, {
+    add: 0,
+    remove: 0
+  })(
+  each(function(arg$){
+    var date, add, remove;
+    date = arg$.date, add = arg$.add, remove = arg$.remove;
+    return console.log(date.toFormat("yyyy-LL-dd") + ":", (add + remove) + " (+" + add + " -" + remove + ")");
+  })(
+  filter(function(it){
+    return it.add && it.remove;
+  })(
+  map(function(date){
     var this$ = this;
-    return function(arg$){
-      var add, remove;
-      add = arg$.add, remove = arg$.remove;
-      if (!(add || remove)) {
-        return;
-      }
-      return console.log(date.toFormat("yyyy-LL-dd") + ":", (add + remove) + " (+" + add + " -" + remove + ")");
-    }(
-    fold(function(s, a){
+    return fold(function(s, a){
       var add, remove;
       add = s.add, remove = s.remove;
       return s.add = add + abs(a[0]), s.remove = remove + abs(a[1]), s;
     }, {
+      date: date,
       add: 0,
       remove: 0
-    })(
-    reject(function(it){
-      return /package\-lock/.exec(it[2]);
     })(
     filter(function(it){
       return it.length > 2;
@@ -40,7 +51,7 @@
       return it.toString();
     }(
     execSync(
-    "git log --numstat --pretty=\"%H\" --author='" + name + "' --since='" + date.startOf('day').toISO(opt) + "' --until='" + date.endOf('day').toISO(opt) + "' --no-merges"))))))));
+    "git log --numstat --pretty=\"%H\" --author='" + name + "' --since='" + date.startOf('day').toISO(opt) + "' --until='" + date.endOf('day').toISO(opt) + "' --no-merges"))))));
   })(
   map(function(it){
     return end.minus({
@@ -53,7 +64,7 @@
       results$.push(i$);
     }
     return results$;
-  }())));
+  }())))))));
   function import$(obj, src){
     var own = {}.hasOwnProperty;
     for (var key in src) if (own.call(src, key)) obj[key] = src[key];
