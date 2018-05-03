@@ -17,7 +17,7 @@ $ npm -v
 $ git --version
 git version 2.15.1
 
-$ npm install -g https://github.com/miyabisun/git-change-lines
+$ npm install -g github:miyabisun/git-change-lines
 ```
 
 # Usage
